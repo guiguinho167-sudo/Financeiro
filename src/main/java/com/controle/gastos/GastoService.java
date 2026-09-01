@@ -19,11 +19,12 @@ public class GastoService {
     public GastoResponse criar(GastoRequest dados) {
         BigDecimal salario = dados.getSalario();
         BigDecimal gasto = dados.getGasto();
-        BigDecimal minimo = new BigDecimal("0.20");
-        BigDecimal calcular = salario.subtract(gasto);
-        BigDecimal porcentagem = calcular.multiply(minimo);
 
-        if (calcular.compareTo(porcentagem) < 0) {
+        BigDecimal minimo = new BigDecimal("0.20");
+        BigDecimal soma = salario.subtract(gasto);
+        BigDecimal sobraminima = salario.multiply(minimo);
+
+        if (soma.compareTo(sobraminima) < 0) {
             throw new ErroException("Seu salario esta abixo de 20% ");
         }
 
@@ -36,7 +37,6 @@ public class GastoService {
 
     }
 
-    @Transactional
     public List<GastoResponse> buscarlista() {
         return repository.findAll()
                 .stream()
@@ -44,7 +44,6 @@ public class GastoService {
                 .toList();
     }
 
-    @Transactional
     public GastoResponse gastos(BigDecimal gastos) {
         GastoDados salvo = repository.findByGasto(gastos)
                 .orElseThrow(() -> new BuscasException("Usuario não encontrado"));
