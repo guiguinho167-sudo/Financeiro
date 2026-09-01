@@ -32,17 +32,17 @@ public class GastoController {
         return ResponseEntity.ok(gasto.buscarlista());
     }
 
-    @GetMapping("/{gasto}")
+    @GetMapping("/{gasto}/buscargastos")
     public ResponseEntity<GastoResponse> gastos(@PathVariable BigDecimal gastos) {
         return ResponseEntity.ok(gasto.gastos(gastos));
     }
 
-    @PutMapping
+    @PutMapping("/atualizar")
     public ResponseEntity<GastoResponse> atualiza(@PathVariable Long id, @RequestBody GastoRequest dados) {
         return ResponseEntity.ok(gasto.atualiza(id, dados));
     }
 
-    @DeleteMapping
+    @DeleteMapping("/deleta")
     public Object delete(@PathVariable Long id) {
         return ResponseEntity.ok(gasto.delete(id));
     }

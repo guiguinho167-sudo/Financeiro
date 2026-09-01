@@ -19,12 +19,12 @@ public class GastoService {
     public GastoResponse criar(GastoRequest dados) {
         BigDecimal salario = dados.getSalario();
         BigDecimal gasto = dados.getGasto();
-
+        BigDecimal minimo = new BigDecimal("0.20");
         BigDecimal calcular = salario.subtract(gasto);
-        BigDecimal minimo = new BigDecimal("20");
+        BigDecimal porcentagem = calcular.multiply(minimo);
 
-        if (calcular.compareTo(minimo) < 0) {
-            throw new ErroException("Seu salario esta ai ");
+        if (calcular.compareTo(porcentagem) < 0) {
+            throw new ErroException("Seu salario esta abixo de 20% ");
         }
 
         GastoDados gastos = new GastoDados();

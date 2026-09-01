@@ -8,5 +8,4 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface GastoRepository extends JpaRepository<GastoDados, Long> {
     Optional<GastoDados> findByGasto(BigDecimal gasto);
 
-    Optional<GastoDados> deletebygasto(BigDecimal gasto);
 }
